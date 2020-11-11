@@ -11,7 +11,11 @@ videos.get('/', getVideosList)
 videos.get('/:id', getVideo)
 videos.post(
 	'/',
-	fileUpload({ useTempFiles : true, tempFileDir : '/tmp/' }),
+	fileUpload({
+		useTempFiles : true,
+		tempFileDir : '/tmp/',
+		limits: { fileSize: 50 * 1024 * 1024 },
+	}),
 	createVideo,
 )
 
