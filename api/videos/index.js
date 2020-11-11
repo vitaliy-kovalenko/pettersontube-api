@@ -1,11 +1,16 @@
 import express from 'express'
+import fileUpload from 'express-fileupload'
 
-import uploadVideo from './upload-video.js'
+import createVideo from './create-video.js'
 import getVideosList from './get-videos-list.js'
 
 const videos = express()
 
 videos.get('/', getVideosList)
-videos.post('/upload', uploadVideo)
+videos.post(
+	'/',
+	fileUpload({ useTempFiles : true, tempFileDir : '/tmp/' }),
+	createVideo,
+)
 
 export default videos
